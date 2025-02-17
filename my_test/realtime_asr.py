@@ -16,7 +16,7 @@ HOTWORDS="闫乃新 于俊凯 吴桐" # 热词
 # 初始化线程安全队列
 audio_queue = Queue(maxsize=MAX_QUEUE_SIZE)
 
-# 模型初始化（添加异常处理）
+# 模型初始化
 try:
     model = AutoModel(
         # 使用流式模型
@@ -37,7 +37,7 @@ except Exception as e:
 
 
 def audio_callback(indata, frames, time, status):
-    """改进的音频回调"""
+    """音频回调"""
     if status:
         print(f"音频采集错误: {status}")
     try:
@@ -47,7 +47,7 @@ def audio_callback(indata, frames, time, status):
 
 
 def process_audio():
-    """处理音频的独立函数"""
+    """处理音频的函数"""
     buffer = np.array([], dtype=np.float32)
     while True:
         try:
@@ -75,7 +75,7 @@ def process_audio():
 
 
 def display_result(text):
-    """改进的结果显示"""
+    """结果显示"""
     now = time.strftime("%H:%M:%S")
     print(f"[{now}] 识别结果: {text}")
 
